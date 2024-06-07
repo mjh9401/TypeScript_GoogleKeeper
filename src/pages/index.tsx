@@ -1,0 +1,5 @@
+export {default as AllNotes} from './AllNotes/AllNote'
+export {default as ArchiveNots} from './ArchiveNotes/ArchiveNotes'
+export {default as TrashNotes} from './TrashNotes/TrashNote'
+export {default as TagNotes} from './TagNotes/TagNote'
+export {default as ErrorPage} from './ErrorPage/ErrorPage'
