@@ -15,6 +15,10 @@ const items =[
   {icon : <FaTrash/>, title : "Trash", id :v4()},
 ]
 
+/**
+ * 사이드바 컴포넌트
+ * @returns 
+ */
 const SideBar = () => {
   const dispatch = useAppDispatch();
 

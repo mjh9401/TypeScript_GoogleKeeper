@@ -13,14 +13,14 @@ function App() {
   const {viewEditTagsModal} = useAppSelector(state=>state.modal);
 
   return (
-    <div className='App'>
+    <div className='app'>
+      {viewEditTagsModal&&<TagsModal type='edit'/>}
       <ToastContainer
         position='bottom-right'
         theme='light'
         pauseOnHover
         autoClose={1500}
         />
-      {viewEditTagsModal&&<TagsModal type='edit'/>}
       <BrowserRouter>
         <SideBar/>
         <div className='app_container'>
