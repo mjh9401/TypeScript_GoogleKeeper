@@ -12,7 +12,7 @@ import getStandardName from '../../utils/getStandard'
 const NavBar = () => {
     const dispatch = useAppDispatch();
     const {pathname, state} =useLocation();
-    // (state);
+
 
     if(pathname === '/404'){
         return null;

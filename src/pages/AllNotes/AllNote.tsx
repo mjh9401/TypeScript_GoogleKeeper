@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { ButtonOutline, Container, EmptyMsgBox } from '../../styles/styles';
 import { Box, InputBox, TopBox } from './AllNotes.styles';
 import { toggleTagsModal } from '../../store/modal/modalSlice';
+import getAllNotes from '../../utils/getAllNotes';
 
 /**
  * 노트 메인화면
@@ -43,6 +44,7 @@ const AllNote = () => {
           </TopBox>
           <Box>
             {/* note */}
+            {getAllNotes(mainNotes,filter)}
           </Box>
         </>
       )}

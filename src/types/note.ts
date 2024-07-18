@@ -13,3 +13,5 @@ export interface Note {
     editedTiem : null | number;
     id : string;
 }
+
+export default Note;
