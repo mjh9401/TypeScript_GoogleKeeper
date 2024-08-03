@@ -3,6 +3,8 @@ import { Card, ContentBox, FooterBox, TagsBox, TopBox } from './NoteCard.styles'
 import { NotesIconBox } from '../../styles/styles';
 import { BsFillPinFill } from 'react-icons/bs';
 import Note from '../../types/note';
+import { useAppDispatch } from '../../hooks/redux';
+import getRelevantBtns from '../../utils/getRelevantBtns';
 
 /**
  * 노트 컴포넌트
@@ -17,7 +19,8 @@ interface NoteCardProps{
 
 const NoteCard = ({note,type}:NoteCardProps) => {
   const {title, content, tags, color, priority, date, isPinned, isRead, id} = note;
-  
+  const dispatch = useAppDispatch();
+
   return (
     <Card style={{background:color}}>
       <TopBox>
@@ -51,6 +54,9 @@ const NoteCard = ({note,type}:NoteCardProps) => {
       </TagsBox>
       <FooterBox>
         <div className='noteCard__date'>{date}</div>
+        <div>
+          {getRelevantBtns(type,note,dispatch)}
+        </div>
       </FooterBox>
     </Card>
   )
