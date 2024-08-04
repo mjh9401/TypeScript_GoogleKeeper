@@ -5,6 +5,7 @@ import { BsFillPinFill } from 'react-icons/bs';
 import Note from '../../types/note';
 import { useAppDispatch } from '../../hooks/redux';
 import getRelevantBtns from '../../utils/getRelevantBtns';
+import { setPinnedNotes } from '../../store/noteList/notesListSlice';
 
 /**
  * 노트 컴포넌트
@@ -36,6 +37,7 @@ const NoteCard = ({note,type}:NoteCardProps) => {
           {type !== 'archive'&& type !== 'trash'&&(
             <NotesIconBox
               className='noteCard__pin'
+              onClick={()=>dispatch(setPinnedNotes({id}))}
             >
               <BsFillPinFill
                 style={{color:isPinned ? "red" : ""}}
