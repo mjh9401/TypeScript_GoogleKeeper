@@ -6,13 +6,17 @@ import { toggleCreateNoteModal, toggleTagsModal } from '../../../store/modal/mod
 import { setEditNote } from '../../../store/noteList/notesListSlice';
 import { ButtonFill, ButtonOutline } from '../../../styles/styles';
 import { FaPlus, FaTimes } from 'react-icons/fa';
+import TagsModal from '../TagsModal/TagsModal';
+import { v4 } from 'uuid';
 
 const CreateNoteModal = () => {
   const dispatch = useAppDispatch();
   const {editNote}= useAppSelector((state)=>state.notesList);
+  const {viewAddTagsModal} = useAppSelector((state)=>state.modal);
+
   const [noteTitle, setNoteTitle] = useState(editNote?.title||'');
   const [value, setValue] = useState(editNote?.content || '');
-  const [addTags, setAddTags] = useState(editNote?.tags || []);
+  const [addedTags, setAddedTags] = useState(editNote?.tags || []);
   const [noteColor, setNoteColor] = useState(editNote?.color || '');
   const [priority, setPriority] = useState(editNote?.priority || "low");
   
@@ -21,8 +25,21 @@ const CreateNoteModal = () => {
     dispatch(setEditNote(null));
   }
 
+  const tagshandler = (tag:string, type:string)=>{
+    const newTag = tag.toLocaleUpperCase();
+    console.log('클릭')
+
+    if(type === 'add'){
+      setAddedTags((prev)=>[...prev,{tag: newTag, id: v4()}]);
+    }else{
+      setAddedTags(addedTags.filter(({tag})=> tag !== newTag));
+    }
+  }
+
   return (
     <FixedContainer>
+      {viewAddTagsModal && <TagsModal type='add' addedTags={addedTags} handleTags={tagshandler}/>}
+      
       <Box>
         <TopBox>
           <div className='createNote_title'>노트 생성하기</div>
@@ -46,10 +63,12 @@ const CreateNoteModal = () => {
         </div>
 
         <AddedTagsBox>
-          {addTags.map(({tag,id})=>(
+          {addedTags.map(({tag,id})=>(
             <div key={id}>
               <span className='createNote__tag'>{tag}</span>
-              <span className='createNote__tag-remove'>
+              <span className='createNote__tag-remove'
+                onClick={()=>tagshandler(tag,'remove')}
+              >
                 <FaTimes/>
               </span>
             </div>
