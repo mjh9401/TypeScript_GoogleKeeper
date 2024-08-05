@@ -8,6 +8,7 @@ import { ButtonFill, ButtonOutline } from '../../../styles/styles';
 import { FaPlus, FaTimes } from 'react-icons/fa';
 import TagsModal from '../TagsModal/TagsModal';
 import { v4 } from 'uuid';
+import TextEditor from '../../TextEditor/TextEditor';
 
 const CreateNoteModal = () => {
   const dispatch = useAppDispatch();
@@ -56,6 +57,11 @@ const CreateNoteModal = () => {
           placeholder='제목...'
           onChange={e=>setNoteTitle(e.target.value)}
         />
+
+        <div>
+          <TextEditor color={noteColor} value={value} setValue={setValue}/>
+        </div>
+
         <div className='createNote__create-btn'>
           <ButtonFill>
             {editNote ? (<span>저장하기</span>):(<><FaPlus/><span>생성하기</span></>)}
