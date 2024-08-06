@@ -10,7 +10,7 @@ export interface Note {
     isRead : boolean;
     date : string;
     createTime : number;
-    editedTiem : null | number;
+    editedTime : null | number;
     id : string;
 }
 
