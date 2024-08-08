@@ -6,6 +6,8 @@ import Note from '../../types/note';
 import { useAppDispatch } from '../../hooks/redux';
 import getRelevantBtns from '../../utils/getRelevantBtns';
 import { setPinnedNotes } from '../../store/noteList/notesListSlice';
+import parse from 'html-react-parser';
+
 
 /**
  * 노트 컴포넌트
@@ -21,6 +23,15 @@ interface NoteCardProps{
 const NoteCard = ({note,type}:NoteCardProps) => {
   const {title, content, tags, color, priority, date, isPinned, isRead, id} = note;
   const dispatch = useAppDispatch();
+
+  const func = ()=>{
+    const imgContent = content.includes("img");
+    if(imgContent){
+      return content;
+    }else{
+      return content.length > 75 ? content.slice(0,75)+'...' : content;
+    }
+  }
 
   return (
     <Card style={{background:color}}>
@@ -47,7 +58,8 @@ const NoteCard = ({note,type}:NoteCardProps) => {
         </div>
       </TopBox>
       <ContentBox>
-        {content}
+        {/* html-react-parser <p>s</p> => s로 변경*/}
+        {parse(func())}
       </ContentBox>
       <TagsBox>
         {tags.map(({tag,id}) => (
