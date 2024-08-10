@@ -9,7 +9,7 @@ export interface Note {
     isPinned : boolean;
     isRead : boolean;
     date : string;
-    createTime : number;
+    createdTime : number;
     editedTime : null | number;
     id : string;
 }
