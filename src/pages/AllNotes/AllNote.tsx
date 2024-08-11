@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
+import { FiltersModal } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { useSelector } from 'react-redux';
+import { toggleFiltersModal } from '../../store/modal/modalSlice';
 import { ButtonOutline, Container, EmptyMsgBox } from '../../styles/styles';
-import { Box, InputBox, TopBox } from './AllNotes.styles';
-import { toggleTagsModal } from '../../store/modal/modalSlice';
 import getAllNotes from '../../utils/getAllNotes';
+import { Box, InputBox, TopBox } from './AllNotes.styles';
 
 /**
  * 노트 메인화면
@@ -13,11 +13,27 @@ import getAllNotes from '../../utils/getAllNotes';
 const AllNote = () => {
   const dispatch = useAppDispatch();
   const {mainNotes} = useAppSelector((state)=>state.notesList);
+  const {viewFiltersModal} = useAppSelector((state)=> state.modal);
   const [filter, setFilter] = useState('');
   const [searchInput, setSearchInput] = useState('');
 
+  const filterHandler = (e:React.ChangeEvent<HTMLInputElement>)=>{
+    setFilter(e.target.value);
+  }
+  const clearHandler = ()=> {
+    setFilter('');
+  }
+
   return (
     <Container>
+      {viewFiltersModal && (
+        <FiltersModal
+          handleFilter={filterHandler}
+          handleClear={clearHandler}
+          filter={filter}
+        />
+      )}
+
       {mainNotes.length === 0? (
         <EmptyMsgBox>
           노트가 없습니다.
@@ -35,7 +51,7 @@ const AllNote = () => {
             </InputBox>
             <div className='note__filter-btn'>
               <ButtonOutline
-                onClick={()=>dispatch(toggleTagsModal(true))}
+                onClick={()=>dispatch(toggleFiltersModal(true))}
                 className='nav__btn'
               >
                 <span>정렬</span>

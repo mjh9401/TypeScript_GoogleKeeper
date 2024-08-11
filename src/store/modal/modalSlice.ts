@@ -9,9 +9,9 @@ interface ModalState{
 
 const initialState :ModalState = {
     viewEditTagsModal : false,
-    viewAddTagsModal :false,
+    viewAddTagsModal : false,
     viewCreateNoteModal : false,
-    viewFiltersModal :false
+    viewFiltersModal : false
 }
 
 const modalSlice = createSlice({
@@ -30,7 +30,7 @@ const modalSlice = createSlice({
     toggleCreateNoteModal:(state, action)=>{
       state.viewCreateNoteModal = action.payload;
     },
-    toggleFiltersModal:(state, action)=>{
+    toggleFiltersModal:(state, action) => {
       state.viewFiltersModal = action.payload;
     },
   }
