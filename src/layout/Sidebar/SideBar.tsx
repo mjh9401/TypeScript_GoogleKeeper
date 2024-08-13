@@ -78,7 +78,7 @@ const SideBar = () => {
           {items.map(({icon,title,id})=>(
             <li key={id} onClick={()=>dispatch(toggleMenu(false))}>
               <NavLink
-                to={`${title.toLocaleLowerCase}`}
+                to={`${title.toLocaleLowerCase()}`}
                 state={`${title}`}
                 className={({ isActive }) => isActive ? "active-item" : "inactive-item"}
               >
