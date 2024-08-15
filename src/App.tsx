@@ -30,7 +30,7 @@ function App() {
           <Routes>
             <Route path='/' element={<AllNote/>}/>
             <Route path='/archive' element={<ArchiveNotes/>}/>
-            <Route path='/trasch' element={<TrashNotes/>}/>
+            <Route path='/trash' element={<TrashNotes/>}/>
             <Route path='/tag/:name' element={<TagNotes/>}/>
             <Route path='/404' element={<ErrorPage/>}/>
             <Route path='/*' element={<Navigate to={"/404"}/>}/>
